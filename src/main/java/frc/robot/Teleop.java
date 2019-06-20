@@ -477,7 +477,6 @@ public static void periodic ()
         {
         // Hardware.retriever.stopRetrieveHatch();
         Hardware.climber.finishEarly();
-        Autonomous.endAutoPath();
         Hardware.lift.resetStateMachine();
         Hardware.manipulator.resetStateMachine();
         } // end if
@@ -533,9 +532,6 @@ public static void periodic ()
         {
         if (Hardware.driveStraightButton.get() == true)
             {
-            Hardware.drive.driveStraight(.2 * DRIVE_SPEED,
-                    Autonomous.ACCELERATION_TIME,
-                    Autonomous.USING_GYRO);
 
             }
         else
