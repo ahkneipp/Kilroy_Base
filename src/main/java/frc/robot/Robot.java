@@ -43,7 +43,7 @@ public void robotInit ()
     // =========================================================
     Hardware.initialize();
 
-    Hardware.setHardwareSettings();
+    //Hardware.setHardwareSettings();
 
 
     // User code goes above here

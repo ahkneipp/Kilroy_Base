@@ -106,9 +106,11 @@ public void printToConsole (String stringToPrint)
     if ((System.currentTimeMillis() - lastTimePrinted) >= this
             .getTimeBetweenPrints())
         {
-        if (Hardware.driverStation.isFMSAttached() == false)
-            System.out.println(stringToPrint);
+        //TODO pass this as a constructor argument
+//        if (Hardware.driverStation.isFMSAttached() == false)
+//            System.out.println(stringToPrint);
 
+    //TODO fix this class to take as a constructor arg
         // resets the clock
         this.setLastTimePrinted(System.currentTimeMillis());
         } // if

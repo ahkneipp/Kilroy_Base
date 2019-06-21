@@ -14,7 +14,6 @@
 // ====================================================================
 package frc.Hardware;
 
-import frc.HardwareInterfaces.DriveWithCamera;
 import frc.HardwareInterfaces.DoubleSolenoid;
 import frc.HardwareInterfaces.DoubleThrowSwitch;
 import frc.HardwareInterfaces.KilroyEncoder;
@@ -335,8 +334,6 @@ public static TankTransmission transmission = null;
 public static Drive drive = null;
 
 public static DrivePID drivePID = null;
-
-public static DriveWithCamera driveWithCamera = null;
 
 // -------------------
 // Assembly classes (e.g. forklift)

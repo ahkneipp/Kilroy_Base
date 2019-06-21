@@ -761,7 +761,8 @@ public void printError (String errorMessage)
     // ADD BACK IN @ANE
     String appendedErrorMessage;
     rioTime = this.getDate();
-    matchTime = Hardware.driverStation.getMatchTime();
+    //TODO fix this class to take as a constructor arg
+    //matchTime = Hardware.driverStation.getMatchTime();
 
     if (appendTimeStamp == true)
         {
@@ -799,7 +800,8 @@ public void printError (String errorMessage,
 {
     String appendedErrorMessage;
     rioTime = getDate();
-    matchTime = Hardware.driverStation.getMatchTime();
+    //TODO fix this class to take as a constructor arg
+    //matchTime = Hardware.driverStation.getMatchTime();
 
     if (appendTimeStamp == true)
         appendedErrorMessage = appendErrorMessage(errorMessage);
@@ -830,7 +832,8 @@ public void printError (String errorMessage,
 public void printError (String errorMessage, PrintsTo PrintsTo)
 {
     rioTime = "";// getDate();
-    matchTime = Hardware.driverStation.getMatchTime();
+    //TODO fix this class to take as a constructor arg
+    //matchTime = Hardware.driverStation.getMatchTime();
 
     // if the error must print to the Drivers' Station
     if (PrintsTo == ErrorMessage.PrintsTo.driverStation ||
@@ -860,7 +863,8 @@ public void printError (String errorMessage, PrintsTo PrintsTo,
 {
     String appendedErrorMessage;
     rioTime = getDate();
-    matchTime = Hardware.driverStation.getMatchTime();
+    //TODO fix this class to take as a constructor arg
+    //matchTime = Hardware.driverStation.getMatchTime();
 
     if (attatchTimeStamp == true)
         {
@@ -877,7 +881,8 @@ public void printError (String errorMessage, PrintsTo PrintsTo,
         {
 
         this.rioTime = this.getDate();
-        this.matchTime = Hardware.driverStation.getMatchTime();
+    //TODO fix this class to take as a constructor arg
+    //    this.matchTime = Hardware.driverStation.getMatchTime();
         final String dsReport = appendErrorMessage(errorMessage);
         DriverStation.reportError(dsReport, false);
         }

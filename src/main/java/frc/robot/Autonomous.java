@@ -32,9 +32,7 @@
 package frc.robot;
 
 import frc.Hardware.Hardware;
-import frc.HardwareInterfaces.DriveWithCamera;
 import frc.HardwareInterfaces.LightSensor;
-import frc.HardwareInterfaces.DriveWithCamera.Side;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Relay.Value;

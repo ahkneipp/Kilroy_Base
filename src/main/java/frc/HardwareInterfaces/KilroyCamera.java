@@ -47,7 +47,7 @@ private boolean haveCamera;
 public static final int noCameraIntReturnValue = -1;
 
 
-private static String KILROY_CAMERA_IP = Hardware.axisCameraIp;
+//private static String KILROY_CAMERA_IP = Hardware.axisCameraIp;
 
 private static int imageNumber = 0;
 
@@ -93,7 +93,8 @@ public KilroyCamera (boolean hasCamera)
     this.haveCamera = hasCamera;
     if (hasCamera)
         {
-        this.camera = new AxisCamera("Kilroy Axis", KILROY_CAMERA_IP);
+        //this.camera = new AxisCamera("Kilroy Axis", KILROY_CAMERA_IP);
+        this.camera = new AxisCamera("Kilroy Axis", "");
         }
     else
         {
@@ -122,8 +123,9 @@ public KilroyCamera (boolean hasCamera, String ip)
     this.haveCamera = hasCamera;
     if (hasCamera)
         {
-        KILROY_CAMERA_IP = ip;
-        this.camera = new AxisCamera("Kilroy Axis", KILROY_CAMERA_IP);
+        //KILROY_CAMERA_IP = ip;
+        //this.camera = new AxisCamera("Kilroy Axis", KILROY_CAMERA_IP);
+        this.camera = new AxisCamera("Kilroy Axis", "");
         }
     else
         {
@@ -434,6 +436,8 @@ public void saveImage (String fileName)
     // Creates new image, keep a log of the creation of the file
     try
         {
+        //TODO Kilroy Camera IP
+        String KILROY_CAMERA_IP = "";
         Runtime.getRuntime()
                 .exec("/usr/bin/wget http://" + KILROY_CAMERA_IP
                         + "/jpg/image.jpg "
