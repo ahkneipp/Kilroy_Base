@@ -28,7 +28,7 @@ public Telemetry ()
  *
  * @param newTimeBetweenPrints
  *                                 - passing in a time between prints overriding
- *                                 the default
+ *                                 the default (in milliseconds)
  */
 public Telemetry (double newTimeBetweenPrints)
 {
