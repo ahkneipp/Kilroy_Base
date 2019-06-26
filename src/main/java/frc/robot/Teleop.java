@@ -64,7 +64,7 @@ public static void init ()
 
 public static void periodic ()
 {
-    
+    Hardware.transmission.drive(-Hardware.leftDriver.getY(), -Hardware.rightDriver.getY());
 } // end Periodic()
 
 
