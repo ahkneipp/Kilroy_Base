@@ -50,7 +50,8 @@ public class Teleop
  */
 public static void init ()
 {
-    
+    Hardware.transmission.setJoystickDeadband(.1);
+    Hardware.transmission.enableDeadband();
 } // end Init
 
 
@@ -64,7 +65,9 @@ public static void init ()
 
 public static void periodic ()
 {
-    Hardware.transmission.drive(-Hardware.leftDriver.getY(), -Hardware.rightDriver.getY());
+    double left = Hardware.transmission.scaleJoystickForDeadband(-Hardware.leftDriver.getY());
+    double right = Hardware.transmission.scaleJoystickForDeadband(-Hardware.rightDriver.getY());
+    Hardware.transmission.drive(left, right);
 } // end Periodic()
 
 
