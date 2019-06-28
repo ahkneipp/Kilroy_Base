@@ -50,8 +50,7 @@ public class Teleop
  */
 public static void init ()
 {
-    Hardware.transmission.setJoystickDeadband(.1);
-    Hardware.transmission.enableDeadband();
+
 } // end Init
 
 
@@ -65,10 +64,87 @@ public static void init ()
 
 public static void periodic ()
 {
-    double left = Hardware.transmission.scaleJoystickForDeadband(-Hardware.leftDriver.getY());
-    double right = Hardware.transmission.scaleJoystickForDeadband(-Hardware.rightDriver.getY());
-    Hardware.transmission.drive(left, right);
+    // =============== AUTOMATED SUBSYSTEMS ===============
+
+    // ================= OPERATOR CONTROLS ================
+
+    // ================== DRIVER CONTROLS =================
+
+    Hardware.drive.drive(Hardware.leftDriver, Hardware.rightDriver);
+
+
 } // end Periodic()
+
+public static void printStatements()
+{
+    // ========== INPUTS ==========
+
+    // ---------- DIGITAL ----------
+
+    // Encoder Distances
+    Hardware.telemetry.printToConsole("L.R. Encoder Dist: " + Hardware.leftRearEncoder.getDistance());
+    Hardware.telemetry.printToConsole("R.R. Encoder Dist: " + Hardware.rightRearEncoder.getDistance());
+    Hardware.telemetry.printToConsole("L.F. Encoder Dist: " + Hardware.leftFrontEncoder.getDistance());
+    Hardware.telemetry.printToConsole("R.F. Encoder Dist: " + Hardware.rightFrontEncoder.getDistance());
+    
+    // Encoder Raw Values
+    Hardware.telemetry.printToConsole("L.R. Encoder Raw: " + Hardware.leftRearEncoder.get());
+    Hardware.telemetry.printToConsole("R.R. Encoder Raw: " + Hardware.rightRearEncoder.get());
+    Hardware.telemetry.printToConsole("L.F. Encoder Raw: " + Hardware.leftFrontEncoder.get());
+    Hardware.telemetry.printToConsole("R.F. Encoder Raw: " + Hardware.rightFrontEncoder.get());
+
+
+    // ---------- ANALOG -----------
+
+    Hardware.telemetry.printToConsole("Gyro: " + Hardware.gyro.getAngle());
+
+    // ----------- CAN -------------
+
+    // -------- SUBSYSTEMS ---------
+
+    // ---------- OTHER ------------
+
+    // Left Driver
+    Hardware.telemetry.printToConsole("Left Driver X: " + Hardware.leftDriver.getX());
+    Hardware.telemetry.printToConsole("Left Driver Y: " + Hardware.leftDriver.getY());
+    Hardware.telemetry.printToConsole("Left Driver Z: " + Hardware.leftDriver.getZ());
+
+    // Right Driver
+    Hardware.telemetry.printToConsole("Right Driver X: " + Hardware.rightDriver.getX());
+    Hardware.telemetry.printToConsole("Right Driver Y: " + Hardware.rightDriver.getY());
+    Hardware.telemetry.printToConsole("Right Driver Z: " + Hardware.rightDriver.getZ());
+
+    // Left Operator
+    Hardware.telemetry.printToConsole("Left Op X: " + Hardware.leftOperator.getX());
+    Hardware.telemetry.printToConsole("Left Op Y: " + Hardware.leftOperator.getY());
+    Hardware.telemetry.printToConsole("Left Op Z: " + Hardware.leftOperator.getZ());
+
+    // Right Operator
+    Hardware.telemetry.printToConsole("Right Op X: " + Hardware.rightOperator.getX());
+    Hardware.telemetry.printToConsole("Right Op Y: " + Hardware.rightOperator.getY());
+    Hardware.telemetry.printToConsole("Right Op Z: " + Hardware.rightOperator.getZ());
+
+    
+    // ========== OUTPUTS ==========
+
+    // ---------- DIGITAL ----------
+
+    // ---------- ANALOG -----------
+
+    // ----------- CAN -------------
+
+    // Motor Percentages
+    Hardware.telemetry.printToConsole("L.R. Motor: " + Hardware.leftRearMotor.get());
+    Hardware.telemetry.printToConsole("R.R. Motor: " + Hardware.rightRearMotor.get());
+    Hardware.telemetry.printToConsole("L.F. Motor: " + Hardware.leftFrontMotor.get());
+    Hardware.telemetry.printToConsole("R.F. Motor: " + Hardware.rightFrontMotor.get());
+
+
+    // -------- SUBSYSTEMS ---------
+
+    // ---------- OTHER ------------
+
+}
 
 
 
