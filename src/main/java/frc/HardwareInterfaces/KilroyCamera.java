@@ -40,8 +40,8 @@ public class KilroyCamera
 // holds the camera instance, or null if we have no camera
 private final AxisCamera camera;
 
-// holds our boolean used to check whether we have a camera
-private boolean haveCamera;
+// Holds the network addres of the KilroyCamera
+private String cameraAddress;
 
 // the return value for integers when we have no camera
 public static final int noCameraIntReturnValue = -1;
@@ -79,60 +79,28 @@ private double vertFieldOfView = 34;
  * Sets the Camera boolean, in case a change is necessary
  *
  * @method KilroyCamera() - constructor
- * @param hasCamera
- *                      - whether we have a camera
+ * @param address
+ *                      - The network address of the camera
  * @author Nathan Lydick
  * @written Oct 16, 2014
+ * @updated_by Alex Kneipp
+ * @updated_on 7/10/2019
  *          -------------------------------------------------------
  */
 
-public KilroyCamera (boolean hasCamera)
+public KilroyCamera (String address)
 {
-    if (hasCamera == false)
+    this.cameraAddress = address;
+    if (address == null)
+    {
         System.out.println("ATTENTION: the AXIS CAMERA is DISABLED :(");
-    this.haveCamera = hasCamera;
-    if (hasCamera)
-        {
-        //this.camera = new AxisCamera("Kilroy Axis", KILROY_CAMERA_IP);
-        this.camera = new AxisCamera("Kilroy Axis", "");
-        }
-    else
-        {
         this.camera = null;
-        }
-}
-
-/**
- * Sets the Camera boolean, in case a change is necessary
- *
- * @method KilroyCamera() - constructor
- * @param hasCamera
- *                      - whether we have a camera
- * @param ip
- *                      The ip that the camera is at with the context of
- *                      10.x.39.11
- * @author Ryan McGee
- *
- * @written Mar 9, 2017
- *          -------------------------------------------------------
- */
-public KilroyCamera (boolean hasCamera, String ip)
-{
-    if (hasCamera == false)
-        System.out.println("ATTENTION: the AXIS CAMERA is DISABLED :(");
-    this.haveCamera = hasCamera;
-    if (hasCamera)
-        {
-        //KILROY_CAMERA_IP = ip;
-        //this.camera = new AxisCamera("Kilroy Axis", KILROY_CAMERA_IP);
-        this.camera = new AxisCamera("Kilroy Axis", "");
-        }
+    }
     else
-        {
-        this.camera = null;
-        }
+    {
+        this.camera = new AxisCamera("Kilroy Axis", address);
+    }
 }
-
 
 /**
  * ---------------------------------------------
@@ -168,7 +136,7 @@ public void clearAllImages ()
 
 public int getBrightness ()
 {
-    if (this.haveCamera)
+    if (this.camera != null)
         return this.camera.getBrightness();
     // returns a value that it shouldn't be
     return noCameraIntReturnValue;
@@ -223,11 +191,13 @@ public final AxisCamera getCameraInstance ()
  * @return boolean - returns whether we have a camera
  * @author Nathan Lydick
  * @written Oct 16, 2014
+ * @updated_by Alex Kneipp
+ * @updated_on 7/10/2019
  *          -------------------------------------------------------
  */
 public boolean gethaveCamera ()
 {
-    return this.haveCamera;
+    return this.camera != null;
 }
 
 // -------------------------------------------------------
@@ -403,6 +373,8 @@ public void setHorizFieldOfView (double FOV)
  *
  * @param fileName
  *                     no extensions necessary
+ * @updated_by Alex Kneipp
+ * @updated_on 7/10/2019
  */
 
 
@@ -436,10 +408,8 @@ public void saveImage (String fileName)
     // Creates new image, keep a log of the creation of the file
     try
         {
-        //TODO Kilroy Camera IP
-        String KILROY_CAMERA_IP = "";
         Runtime.getRuntime()
-                .exec("/usr/bin/wget http://" + KILROY_CAMERA_IP
+                .exec("/usr/bin/wget http://" + this.cameraAddress
                         + "/jpg/image.jpg "
                         + "-O /home/lvuser/images/" + fileName
                         + ".jpg >> /home/lvuser/images/log.txt");
@@ -504,11 +474,18 @@ public void saveTextSafely (String text)
  *                  - the new value as to whether we have a camera
  * @author Nathan Lydick
  * @written Oct 16, 2014
+ * @updated_by Alex Kneipp
+ * @updated_on 7/10/2019
+ * @deprecated on 7/10/2019
+ *  Since the haveCamera boolean is no longer used, this function is a nop but included for compatibility
  *          -------------------------------------------------------
  */
+@Deprecated
 public void setHaveCamera (boolean value)
 {
-    this.haveCamera = value;
+    //Avoiding warnings for useless statements
+    if(value)
+        return;
 }
 
 // public void writeBrightness (int brightness)
