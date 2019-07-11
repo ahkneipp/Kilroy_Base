@@ -31,17 +31,6 @@
 // ====================================================================
 package frc.robot;
 
-import frc.Hardware.Hardware;
-import frc.HardwareInterfaces.LightSensor;
-import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Relay.Value;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.Utils.drive.Drive;
-import frc.Utils.drive.Drive.BrakeType;
-import edu.wpi.first.cameraserver.CameraServer;
-
-
 /**
  * An Autonomous class. This class <b>beautifully</b> uses state machines in
  * order to periodically execute instructions during the Autonomous period.

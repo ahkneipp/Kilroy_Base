@@ -32,30 +32,20 @@ public class Robot extends TimedRobot
 @Override
 public void robotInit ()
 {
+    System.out.println("Started robotInit()");
     // ---------------------------------------
     // start setup - tell the user we are beginning
     // setup
     // ---------------------------------------
-    System.out.println("Started robotInit()");
-
-    // =========================================================
-    // User code goes below here
-    // =========================================================
+    
     Hardware.initialize();
 
-    //Hardware.setHardwareSettings();
-
-
-    // User code goes above here
-    // =========================================================
     // ---------------------------------------
     // done setup - tell the user we are complete
     // setup
     // ---------------------------------------
-    // Teleop.printStatements();
 
     System.out.println("Kilroy " + Hardware.robotIdentity + " has started.  All hardware items created.");
-
 } // end robotInit()
 
 /**
@@ -85,23 +75,14 @@ public void robotPeriodic ()
 @Override
 public void autonomousInit ()
 {
+    System.out.println("Started AutonousInit().");
     // ---------------------------------------
     // start setup - tell the user we are beginning
     // setup
     // ---------------------------------------
-    System.out.println("Started AutonousInit().");
 
-    // =========================================================
-    // User code goes below here
-    // =========================================================
-    // m_autoSelected = SmartDashboard.getString("Auto Selector",
-    // kDefaultAuto);
     Autonomous.init();
 
-
-    // =========================================================
-    // User code goes above here
-    // =========================================================
     // ---------------------------------------
     // done setup - tell the user we are complete
     // setup
@@ -124,14 +105,8 @@ public void autonomousInit ()
 @Override
 public void autonomousPeriodic ()
 {
-    // =========================================================
-    // User code goes below here
-    // =========================================================
     Autonomous.periodic();
 
-    // =========================================================
-    // User code goes above here
-    // =========================================================
 }// end autonomousPeriodic()
 
 /**
@@ -145,18 +120,14 @@ public void autonomousPeriodic ()
 @Override
 public void disabledInit ()
 {
+    System.out.println("Started DisabledInit().");
     // ---------------------------------------
     // start setup - tell the user we are beginning
     // setup
     // ---------------------------------------
-    System.out.println("Started DisabledInit().");
-    // =========================================================
-    // User code goes below here
-    // =========================================================
 
-    // =========================================================
-    // User code goes above here
-    // =========================================================
+
+    
     // ---------------------------------------
     // done setup - tell the user we are complete
     // setup
@@ -177,13 +148,7 @@ public void disabledInit ()
 @Override
 public void disabledPeriodic ()
 {
-    // =========================================================
-    // User code goes below here
-    // =========================================================
 
-    // =========================================================
-    // User code goes above here
-    // =========================================================
 } // end disabledPeriodic()
 
 /**
@@ -198,19 +163,14 @@ public void disabledPeriodic ()
 @Override
 public void teleopInit ()
 {
+    System.out.println("Started teleopInit().");
     // ---------------------------------------
     // start setup - tell the user we are beginning
     // setup
     // ---------------------------------------
-    System.out.println("Started teleopInit().");
-    // =========================================================
-    // User code goes below here
-    // =========================================================
+    
     Teleop.init();
 
-    // =========================================================
-    // User code goes above here
-    // =========================================================
     // ---------------------------------------
     // done setup - tell the user we are complete
     // setup
@@ -235,14 +195,8 @@ public void teleopPeriodic ()
     // which contains the user code.
     // -------------------------------------
 
-    // =========================================================
-    // User code goes below here
-    // =========================================================
    Teleop.periodic();
 
-    // =========================================================
-    // User code goes above here
-    // =========================================================
 
 } // end teleopPeriodic()
 
@@ -257,13 +211,7 @@ public void teleopPeriodic ()
 @Override
 public void testInit ()
 {
-    // =========================================================
-    // User code goes below here
-    // =========================================================
     this.teleopInit();
-    // =========================================================
-    // User code goes above here
-    // =========================================================
 
 } // end testInit()
 
@@ -274,9 +222,5 @@ public void testInit ()
 public void testPeriodic ()
 {
 } // end testPeriodic()
-
-// ==========================================
-// TUNEABLES
-// ==========================================
 
 } // end robot class

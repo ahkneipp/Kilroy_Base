@@ -7,7 +7,6 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
-// import frc.Hardware.Hardware;
 
 /**
  * A sensor class that is able to use both CAN features and DIO features
@@ -31,7 +30,7 @@ private final SensorType type;
 
 /**
  * REV_CAN sets saved position equal to the position of the encoder. So that the
- * savedPosition can be subtracted from the position to create a sudo "reset".
+ * savedPosition can be subtracted from the position to create a pseudo "reset".
  * Every instance of getPosition() has savedPosition being subtracted from it to
  * create this reset(). The reason for this is that SparkMax encoder does not
  * have an internal reset of the encoder value

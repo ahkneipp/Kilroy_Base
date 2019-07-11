@@ -58,10 +58,10 @@ public static void initialize()
 
         // ==============CAN INIT=============
                 //Motor Controllers
-                leftRearMotor = new CANSparkMax(10, MotorType.kBrushless);
-                rightRearMotor = new CANSparkMax(11, MotorType.kBrushless);
-                leftFrontMotor = new CANSparkMax(12, MotorType.kBrushless);
-                rightFrontMotor = new CANSparkMax(13, MotorType.kBrushless);
+                leftRearMotor = new CANSparkMax(13, MotorType.kBrushless);
+                rightRearMotor = new CANSparkMax(15, MotorType.kBrushless);
+                leftFrontMotor = new CANSparkMax(11, MotorType.kBrushless);
+                rightFrontMotor = new CANSparkMax(14, MotorType.kBrushless);
                 
                 //Encoders
                 leftRearEncoder = new KilroyEncoder((CANSparkMax) leftRearMotor);
@@ -148,7 +148,7 @@ public static Timer autoTimer = new Timer();
 
 public static Timer telopTimer = new Timer();
 
-public static Telemetry telemetry = new Telemetry();
+public static Telemetry telemetry = new Telemetry(driverStation);
 
 // ------------------------------------
 // Drive system
