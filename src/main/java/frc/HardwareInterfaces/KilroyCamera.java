@@ -22,7 +22,6 @@ package frc.HardwareInterfaces;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import edu.wpi.cscore.AxisCamera;
-import frc.Hardware.Hardware;
 
 /**
  * A camera container/interface that holds an instance of the AxisCamera
@@ -45,9 +44,6 @@ private String cameraAddress;
 
 // the return value for integers when we have no camera
 public static final int noCameraIntReturnValue = -1;
-
-
-//private static String KILROY_CAMERA_IP = Hardware.axisCameraIp;
 
 private static int imageNumber = 0;
 
