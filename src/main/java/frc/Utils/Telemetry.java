@@ -1,6 +1,6 @@
 package frc.Utils;
 
-import frc.Hardware.Hardware;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -17,9 +17,10 @@ public class Telemetry
  * constructor for
  *
  */
-public Telemetry ()
+public Telemetry (DriverStation driverstation)
 {
     this.init();
+    this.driverStation = driverstation;
 }
 
 /**
@@ -30,10 +31,11 @@ public Telemetry ()
  *                                 - passing in a time between prints overriding
  *                                 the default (in milliseconds)
  */
-public Telemetry (double newTimeBetweenPrints)
+public Telemetry (DriverStation driverStation, double newTimeBetweenPrints)
 {
     this.setTimeBetweenPrints(newTimeBetweenPrints);
     this.init();
+    this.driverStation = driverStation;
 }
 
 /**
@@ -106,14 +108,12 @@ public void printToConsole (String stringToPrint)
     if ((System.currentTimeMillis() - lastTimePrinted) >= this
             .getTimeBetweenPrints())
         {
-        //TODO pass this as a constructor argument
-//        if (Hardware.driverStation.isFMSAttached() == false)
-//            System.out.println(stringToPrint);
+        if (driverStation.isFMSAttached() == false)
+            System.out.println(stringToPrint);
 
-    //TODO fix this class to take as a constructor arg
         // resets the clock
         this.setLastTimePrinted(System.currentTimeMillis());
-        } // if
+        } 
 } // end printToConsole()
 
 /**
@@ -145,5 +145,7 @@ private double timeBetweenPrints = 2000;
 
 // initial state
 private double lastTimePrinted = 0.0;
+
+private final DriverStation driverStation;
 
 }

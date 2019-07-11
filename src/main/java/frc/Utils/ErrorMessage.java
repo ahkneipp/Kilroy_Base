@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import frc.Hardware.Hardware;
 import edu.wpi.first.wpilibj.DriverStation;
 
 /**

@@ -2115,12 +2115,10 @@ public boolean turnDegrees (int degrees, double speed,
     // If degrees is positive, then turn left. If not, then turn right.
     if (degrees > 0)
         {
-        // Hardware.drive.drive(speed, -speed);
         this.accelerateProportionaly(speed, -speed, acceleration);
         }
     else
         {
-        // Hardware.drive.drive(-speed, speed);
         this.accelerateProportionaly(-speed, speed, acceleration);
         }
     return false;
