@@ -82,23 +82,27 @@ class MotionSensorPackage
     private ArrayList<EncoderInfo> encoders = null;
     private ArrayList<AnalogAccelerometer> accelerometers = null;
     private final double DEFAULT_WHEEL_RADIUS;
+    private final double ROBOT_RADIUS;
 
     /**
-     * Create a new motion sensor package, assuming the radius of our wheels is 0mm
+     * Create a new motion sensor package, assuming the radius of our wheels is 0mm, and that the robot is a point mass.
      */
-    MotionSensorPackage()
+    public MotionSensorPackage()
     {
-        this(0.0);
+        this(0.0, 0.0);
     }
 
     /**
      * Create a new motion sensor package, with an assumed wheel radius for all of the added encoders
      * @param wheelRadius_mm
      *  The radius of the wheels on the robot, in mm.
+     * @param robotRadius_mm
+     *  The average distance from the center of the robot to each of the wheels
      */
-    MotionSensorPackage(double wheelRadius_mm)
+    public MotionSensorPackage(double wheelRadius_mm, double robotRadius_mm)
     {
         this.DEFAULT_WHEEL_RADIUS = wheelRadius_mm;
+        this.ROBOT_RADIUS = robotRadius_mm;
     }
 
     /**
@@ -106,7 +110,7 @@ class MotionSensorPackage
      * @param toAdd
      *  The gyroscope object to register
      */
-    void addGyro(Gyro toAdd)
+    public void addGyro(Gyro toAdd)
     {
         if(this.gyros == null)
         {
@@ -120,7 +124,7 @@ class MotionSensorPackage
      * @param toAdd
      *  The accelerometer object to register
      */
-    void addAccelerometer(AnalogAccelerometer toAdd)
+    public void addAccelerometer(AnalogAccelerometer toAdd)
     {
         if(this.accelerometers == null)
         {
@@ -136,7 +140,7 @@ class MotionSensorPackage
      * @param wheelRadius_mm
      *  The radius of the wheel for this encoder
      */
-    void addEncoder(Encoder enc, RobotLocation loc, double wheelRadius_mm)
+    public void addEncoder(Encoder enc, RobotLocation loc, double wheelRadius_mm)
     {
         if(this.encoders == null)
         {
@@ -152,8 +156,67 @@ class MotionSensorPackage
      * @param loc
      *  The location on the robot of the wheel
      */
-    void addEncoder(Encoder enc, RobotLocation loc)
+    public void addEncoder(Encoder enc, RobotLocation loc)
     {
         addEncoder(enc, loc, this.DEFAULT_WHEEL_RADIUS);
+    }
+
+    public void zeroSensors()
+    {
+        zeroSensorClass(SensorClass.ENCODERS);
+        zeroSensorClass(SensorClass.GYROS);
+        zeroSensorClass(SensorClass.ACCELEROMETERS);
+    }
+
+    public enum SensorClass
+    {
+        ENCODERS,
+        GYROS,
+        ACCELEROMETERS;
+    }
+
+    public void zeroSensorClass(SensorClass toZero)
+    {
+        switch(toZero)
+        {
+            default:
+            case ENCODERS:
+                for(EncoderInfo e : this.encoders)
+                {
+                    e.getEncoder().reset();
+                }
+            break;
+            case GYROS:
+                for(Gyro g: this.gyros)
+                {
+                    g.reset();
+                }
+            break;
+            case ACCELEROMETERS:
+                //Do nothing
+            break;
+        }
+    }
+
+
+    public double getLinearDistance()
+    {
+        double avg = 0;
+        for(EncoderInfo e: this.encoders)
+        {
+            avg += e.getEncoder().getDistance();
+        }
+        avg /= this.encoders.size();
+
+    }
+
+    public double getRotation()
+    {
+
+    }
+
+    public double getRotationNoEncoders()
+    {
+
     }
 }
