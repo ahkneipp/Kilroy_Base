@@ -82,7 +82,8 @@ class MotionSensorPackage
     private ArrayList<EncoderInfo> encoders = null;
     private ArrayList<AnalogAccelerometer> accelerometers = null;
     private final double DEFAULT_WHEEL_RADIUS;
-    private final double ROBOT_RADIUS;
+    private final double ROBOT_WIDTH;
+    private final double ROBOT_LENGTH;
 
     /**
      * Create a new motion sensor package, assuming the radius of our wheels is 0mm, and that the robot is a point mass.
@@ -102,7 +103,7 @@ class MotionSensorPackage
     public MotionSensorPackage(double wheelRadius_mm, double robotRadius_mm)
     {
         this.DEFAULT_WHEEL_RADIUS = wheelRadius_mm;
-        this.ROBOT_RADIUS = robotRadius_mm;
+        this.ROBOT_WIDTH = robotRadius_mm;
     }
 
     /**
@@ -207,16 +208,59 @@ class MotionSensorPackage
             avg += e.getEncoder().getDistance();
         }
         avg /= this.encoders.size();
-
+        return avg;
     }
 
-    public double getRotation()
+    public double getRotationGyro()
     {
-
+        double avg = 0;
+        for(Gyro g: this.gyros)
+        {
+            avg += g.getAngle();
+        }
+        avg /= g.size();
+        return avg;
     }
 
-    public double getRotationNoEncoders()
+    private double getPortEncoderAverage()
     {
+        double avg = 0;
+        int count = 0;
+        for(EncoderInfo e: this.encoders)
+        {
+            if(e.getLocation() == RobotLocation.BACK_PORT || 
+                e.getLocation() == RobotLocation.MID_PORT || 
+                e.getLocation() == RobotLocation.FRONT_PORT)
+            {
+                avg += e.getEncoder().getDistance();
+                count++;
+            }
+        }
+        return avg/count;
+    }
 
+    private double getStarboardEncoderAverage()
+    {
+        double avg = 0;
+        int count = 0;
+        for(EncoderInfo e: this.encoders)
+        {
+            if(e.getLocation() == RobotLocation.BACK_STARBOARD || 
+                e.getLocation() == RobotLocation.MID_STARBOARD || 
+                e.getLocation() == RobotLocation.FRONT_STARBOARD)
+            {
+                avg += e.getEncoder().getDistance();
+                count++;
+            }
+        }
+        return avg/count;
+    }
+
+    public double getRotationEncoders()
+    {
+        double leftDistance = getPortEncoderAverage();
+        double rightDistance = getStarboardEncoderAverage();
+        double thetaRadians = (-leftDistance - rightDistance)/(-this.ROBOT_WIDTH);
+        return Math.toDegrees(thetaRadians);
     }
 }
