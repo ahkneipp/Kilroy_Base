@@ -29,6 +29,16 @@ class MotionSensorPackage
     }
 
     /**
+     * All of the kinds of sensors this class can hold
+     */
+    public enum SensorClass
+    {
+        ENCODERS,
+        GYROS,
+        ACCELEROMETERS;
+    }
+
+    /**
      * Class which encompasses and Encoder, its location, and the radius of the wheel it is attached to.
      * This class is immutable, as it fills the role of a Value Object
      */
@@ -163,6 +173,9 @@ class MotionSensorPackage
         addEncoder(enc, loc, this.DEFAULT_WHEEL_RADIUS);
     }
 
+    /**
+     * Resets all of the sensors registered with this MotionSensorPackage
+     */
     public void zeroSensors()
     {
         zeroSensorClass(SensorClass.ENCODERS);
@@ -170,13 +183,10 @@ class MotionSensorPackage
         zeroSensorClass(SensorClass.ACCELEROMETERS);
     }
 
-    public enum SensorClass
-    {
-        ENCODERS,
-        GYROS,
-        ACCELEROMETERS;
-    }
-
+    /**
+     * Resets a group of sensors according to their type.
+     * @see SensorClass
+     */
     public void zeroSensorClass(SensorClass toZero)
     {
         switch(toZero)
@@ -200,7 +210,9 @@ class MotionSensorPackage
         }
     }
 
-
+    /**
+     * Returns the average linear distance recorded by all of the encoders registered in this MotionSensorPackage object.
+     */
     public double getLinearDistance()
     {
         double avg = 0;
@@ -212,6 +224,9 @@ class MotionSensorPackage
         return avg;
     }
 
+    /**
+     * Gets the rotation of the robot since the last reset according to the gyros registered in this object.
+     */
     public double getRotationGyro()
     {
         double avg = 0;
@@ -223,6 +238,10 @@ class MotionSensorPackage
         return avg;
     }
 
+    /**
+     * @return
+     *    The average recorded distance of all the encoders on the port side of the robot
+     */
     private double getPortEncoderAverage()
     {
         double avg = 0;
@@ -240,6 +259,10 @@ class MotionSensorPackage
         return avg/count;
     }
 
+    /**
+     * @return
+     *    The average recorded distance of all the encoders on the starboard side of the robot
+     */
     private double getStarboardEncoderAverage()
     {
         double avg = 0;
@@ -257,8 +280,26 @@ class MotionSensorPackage
         return avg/count;
     }
 
+    /**
+     * @return
+     *  The rotation of the robot (in degrees) according to the encoders.
+     *  A clockwise rotation is a positive value, counterclockwise is negative.
+     */
     public double getRotationEncoders()
     {
+        /*
+         * The formula for this can be found by solving the system of linear equations:
+         * dl = r1 * theta
+         * dr = r2 * theta
+         * Where dl is the distance travelled by the left side of the robot, and dr is the distance travelled by the right.
+         * r1 is the radius the left side of the robot makes with the center of the turn, and r2 is the right side's radius.
+         * We see that r2 = r1 - ROBOT_WIDTH
+         * so substituting we get:
+         * dl = r1 * theta
+         * dr = (r1 - ROBOT_WIDTH) * theta
+         * by distributing the second equation and solving for theta in terms of dl and dr we get
+         * (dl - dr) / (-ROBOT_WIDTH) = theta
+        */
         double leftDistance = getPortEncoderAverage();
         double rightDistance = getStarboardEncoderAverage();
         double thetaRadians = (-leftDistance - rightDistance)/(-this.ROBOT_WIDTH);
