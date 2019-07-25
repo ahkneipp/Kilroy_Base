@@ -90,7 +90,7 @@ class MotionSensorPackage
      */
     public MotionSensorPackage()
     {
-        this(0.0, 0.0);
+        this(0.0, 0.0, 0.0);
     }
 
     /**
@@ -100,10 +100,11 @@ class MotionSensorPackage
      * @param robotRadius_mm
      *  The average distance from the center of the robot to each of the wheels
      */
-    public MotionSensorPackage(double wheelRadius_mm, double robotRadius_mm)
+    public MotionSensorPackage(double wheelRadius_mm, double robotWidth_mm, double robotLength_mm)
     {
         this.DEFAULT_WHEEL_RADIUS = wheelRadius_mm;
-        this.ROBOT_WIDTH = robotRadius_mm;
+        this.ROBOT_WIDTH = robotWidth_mm;
+        this.ROBOT_LENGTH = robotLength_mm;
     }
 
     /**
@@ -218,7 +219,7 @@ class MotionSensorPackage
         {
             avg += g.getAngle();
         }
-        avg /= g.size();
+        avg /= this.gyros.size();
         return avg;
     }
 
