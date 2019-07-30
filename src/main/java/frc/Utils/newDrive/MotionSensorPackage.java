@@ -220,7 +220,10 @@ class MotionSensorPackage
         {
             avg += e.getEncoder().getDistance();
         }
-        avg /= this.encoders.size();
+        if(this.encoders.size() != 0)
+        {
+            avg /= this.encoders.size();
+        }
         return avg;
     }
 
@@ -234,7 +237,10 @@ class MotionSensorPackage
         {
             avg += g.getAngle();
         }
-        avg /= this.gyros.size();
+        if(this.gyros.size() != 0)
+        {
+            avg /= this.gyros.size();
+        }
         return avg;
     }
 
@@ -256,7 +262,11 @@ class MotionSensorPackage
                 count++;
             }
         }
-        return avg/count;
+        if(count != 0)
+        {
+            return avg/count;
+        }
+        return 0.0;
     }
 
     /**
@@ -277,7 +287,11 @@ class MotionSensorPackage
                 count++;
             }
         }
-        return avg/count;
+        if(count != 0)
+        {
+            return avg/count;
+        }
+        return 0.0;
     }
 
     /**
@@ -304,5 +318,40 @@ class MotionSensorPackage
         double rightDistance = getStarboardEncoderAverage();
         double thetaRadians = (-leftDistance - rightDistance)/(-this.ROBOT_WIDTH);
         return Math.toDegrees(thetaRadians);
+    }
+
+    private boolean hasEncodersOnBothSides()
+    {
+        boolean hasPort = false;
+        boolean hasStarboard = false;
+        for(EncoderInfo e: this.encoders)
+        {
+            if(e.getLocation() == RobotLocation.BACK_PORT || 
+                e.getLocation() == RobotLocation.MID_PORT || 
+                e.getLocation() == RobotLocation.FRONT_PORT)
+            {
+                hasPort = true;
+            }
+            if(e.getLocation() == RobotLocation.BACK_STARBOARD || 
+                e.getLocation() == RobotLocation.MID_STARBOARD || 
+                e.getLocation() == RobotLocation.FRONT_STARBOARD)
+            {
+                hasStarboard = true;
+            }
+        }
+        return hasPort && hasStarboard;
+    }
+
+    public double getRotation()
+    {
+        if(this.gyros.size() >= 1)
+        {
+            return this.getRotationGyro();
+        }
+        else if (this.encoders.size() >= 2 && this.hasEncodersOnBothSides())
+        {
+            return this.getRotationEncoders();
+        }
+        return 0.0;
     }
 }
