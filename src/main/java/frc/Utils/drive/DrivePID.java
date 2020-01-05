@@ -41,11 +41,6 @@ public class DrivePID extends Drive {
         encoders[1] = rightRearEncoder;
         encoders[2] = leftFrontEncoder;
         encoders[3] = rightFrontEncoder;
-
-        driveStraightInchesPID.setName("Drive Straight Inches");
-        driveStraightPID_enc.setName("Encoder Drive Straight");
-        driveStraightPID_gyro.setName("Gyro Drive Straight");
-
     }
 
     /**
@@ -76,6 +71,9 @@ public class DrivePID extends Drive {
         LiveWindow.remove(driveStraightInchesPID);
         LiveWindow.remove(driveStraightPID_enc);
         LiveWindow.remove(driveStraightPID_gyro);
+        LiveWindow.remove(turnDegreesPID_enc);
+        LiveWindow.remove(turnDegreesPID_gyro);
+        LiveWindow.remove(brakePID);
     }
 
     /**
@@ -115,10 +113,10 @@ public class DrivePID extends Drive {
             this.brakePIDTolerance[3] = tolerance;
             break;
         case DRIVESTRAIGHT_ENC:
-            this.driveStraightPIDTolerance[0] = p;
-            this.driveStraightPIDTolerance[1] = i;
-            this.driveStraightPIDTolerance[2] = d;
-            this.driveStraightPIDTolerance[3] = tolerance;
+            this.driveStraightEncPIDTolerance[0] = p;
+            this.driveStraightEncPIDTolerance[1] = i;
+            this.driveStraightEncPIDTolerance[2] = d;
+            this.driveStraightEncPIDTolerance[3] = tolerance;
             return;
         case DRIVESTRAIGHT_GYRO:
             this.driveStraightGyroPIDTolerance[0] = p;
@@ -237,7 +235,7 @@ public class DrivePID extends Drive {
             turnDegreesPID_gyro.getPIDController().reset();
             turnDegreesPID_gyro.setSetpoint(degrees);
             turnDegreesPID_gyro.enable();
-            super.reset();
+            super.getGyro().reset();
             turnDegreesGyroInit = false;
         }
 
@@ -246,7 +244,8 @@ public class DrivePID extends Drive {
         if (turnDegreesPID_gyro.onTarget() == true) {
             stop();
             turnDegreesPID_gyro.disable();
-            turnDegreesGyroInit = false;
+            turnDegreesGyroInit = true;
+            return true;
         }
         return false;
     }
@@ -270,8 +269,8 @@ public class DrivePID extends Drive {
                 super.getGyro().reset();
             } else {
                 this.driveStraightPID_enc.getPIDController().reset();
-                this.driveStraightPID_enc.getPIDController().setPID(driveStraightPIDTolerance[0],
-                        driveStraightPIDTolerance[1], driveStraightPIDTolerance[2]);
+                this.driveStraightPID_enc.getPIDController().setPID(driveStraightEncPIDTolerance[0],
+                        driveStraightEncPIDTolerance[1], driveStraightEncPIDTolerance[2]);
                 this.driveStraightPID_enc.setSetpoint(0);
                 this.driveStraightPID_enc.enable();
             }
@@ -390,8 +389,17 @@ public class DrivePID extends Drive {
             this.turnPIDToleranceAccel[4] = turnDegreesTuner_enc.acceleration;
             break;
         case TURN_GYRO:
+            this.turnGyroPIDToleranceAccel[0]=turnDegreesTuner_gyro.p;
+            this.turnGyroPIDToleranceAccel[1]=turnDegreesTuner_gyro.i;
+            this.turnGyroPIDToleranceAccel[2]=turnDegreesTuner_gyro.d;
+            this.turnGyroPIDToleranceAccel[3]=turnDegreesTuner_gyro.tolerance;
+            this.turnGyroPIDToleranceAccel[4]=turnDegreesTuner_gyro.acceleration;
             break;
         case DRIVESTRAIGHT_ENC:
+            this.driveStraightEncPIDTolerance[0]=driveStraightTuner_enc.p;
+            this.driveStraightEncPIDTolerance[1]=driveStraightTuner_enc.i;
+            this.driveStraightEncPIDTolerance[2]=driveStraightTuner_enc.d;
+            this.driveStraightEncPIDTolerance[3]=driveStraightTuner_enc.tolerance;
             break;
         case DRIVESTRAIGHT_GYRO:
             this.driveStraightGyroPIDTolerance[0] = driveStraightTuner_gyro.p;
@@ -564,16 +572,15 @@ public class DrivePID extends Drive {
 
     private PIDTuner brakeTuner = new PIDTuner("Braking");
 
-    // private PIDTuner driveStraightTuner_enc = new PIDTuner(
-    // "Drive Straight Encoder");
-
     private PIDTuner driveStraightTuner_gyro = new PIDTuner("Drive Straight Gyro");
+
+    private PIDTuner driveStraightTuner_enc = new PIDTuner("Drive Straight Encoder");
 
     private PIDTuner driveInchesTuner = new PIDTuner("Drive Inches PID");
 
     private PIDTuner turnDegreesTuner_enc = new PIDTuner("Turn Degrees Encoder");
 
-    // private PIDTuner turnDegreesTuner_gyro = new PIDTuner("Turn Degrees Gyro");
+    private PIDTuner turnDegreesTuner_gyro = new PIDTuner("Turn Degrees Gyro");
 
     private boolean isTuningPID = false;
 
@@ -604,7 +611,7 @@ public class DrivePID extends Drive {
 
     private long driveStraightLastTime = 0;
 
-    private double[] driveStraightPIDTolerance =
+    private double[] driveStraightEncPIDTolerance =
             // {P, I, D, Tolerance}
             { 0, 0, 0, 0 };
 

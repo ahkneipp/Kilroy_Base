@@ -221,6 +221,7 @@ public void testInit ()
 @Override
 public void testPeriodic ()
 {
+    Teleop.periodic();
 } // end testPeriodic()
 
 } // end robot class
