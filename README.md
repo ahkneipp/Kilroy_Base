@@ -1,2 +1,3 @@
-# 2019
-Source Code for First Team 339's 2019 season
+# Kilroy Base
+
+A codebase for FIRST Robotics Competition team 339 "Kilroy"
