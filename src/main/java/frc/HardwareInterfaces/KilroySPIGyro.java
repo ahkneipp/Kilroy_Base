@@ -140,14 +140,18 @@ public boolean hasGyro ()
 /**
  * Free the gyro object from memory, since it is called through a JNI.
  */
-public void free ()
+public void close()
 {
     if (this.hasGyro() == false)
         {
         System.out.println("***Gyro is NOT enabled!***");
         return;
         }
-    this.gyro.close();
+
+    //Intentionally do nothing, as wpilib has not yet immplemented a close() function.
+    //Therefore calling this next line *might* result in a recursive loop. -McGee
+
+    //this.gyro.close();
 }
 
 }

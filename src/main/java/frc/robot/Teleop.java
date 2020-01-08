@@ -82,21 +82,22 @@ public static void printStatements()
     // ---------- DIGITAL ----------
 
     // Encoder Distances
-    Hardware.telemetry.printToConsole("L.R. Encoder Dist: " + Hardware.leftRearEncoder.getDistance());
-    Hardware.telemetry.printToConsole("R.R. Encoder Dist: " + Hardware.rightRearEncoder.getDistance());
-    Hardware.telemetry.printToConsole("L.F. Encoder Dist: " + Hardware.leftFrontEncoder.getDistance());
-    Hardware.telemetry.printToConsole("R.F. Encoder Dist: " + Hardware.rightFrontEncoder.getDistance());
+    // Hardware.telemetry.printToConsole("L. Encoder Dist: " + Hardware.leftEncoder.getDistance());
+    // Hardware.telemetry.printToConsole("R. Encoder Dist: " + Hardware.rightEncoder.getDistance());
     
     // Encoder Raw Values
-    Hardware.telemetry.printToConsole("L.R. Encoder Raw: " + Hardware.leftRearEncoder.get());
-    Hardware.telemetry.printToConsole("R.R. Encoder Raw: " + Hardware.rightRearEncoder.get());
-    Hardware.telemetry.printToConsole("L.F. Encoder Raw: " + Hardware.leftFrontEncoder.get());
-    Hardware.telemetry.printToConsole("R.F. Encoder Raw: " + Hardware.rightFrontEncoder.get());
+    // Hardware.telemetry.printToConsole("L. Encoder Raw: " + Hardware.leftEncoder.get());
+    // Hardware.telemetry.printToConsole("R. Encoder Raw: " + Hardware.rightEncoder.get());
 
+    // Switch Values
+    // Hardware.telemetry.printToConsole("Six Pos Sw: " + Hardware.autoSixPosSwitch.getPosition());
+    // Hardware.telemetry.printToConsole("Auto Disable Sw: " + Hardware.autoDisableSwitch.isOn());
 
     // ---------- ANALOG -----------
 
-    Hardware.telemetry.printToConsole("Gyro: " + Hardware.gyro.getAngle());
+    // Hardware.telemetry.printToConsole("Gyro: " + Hardware.gyro.getAngle());
+
+    // Hardware.telemetry.printToConsole("Delay Pot: " + Hardware.delayPot.get());
 
     // ----------- CAN -------------
 
@@ -105,24 +106,24 @@ public static void printStatements()
     // ---------- OTHER ------------
 
     // Left Driver
-    Hardware.telemetry.printToConsole("Left Driver X: " + Hardware.leftDriver.getX());
-    Hardware.telemetry.printToConsole("Left Driver Y: " + Hardware.leftDriver.getY());
-    Hardware.telemetry.printToConsole("Left Driver Z: " + Hardware.leftDriver.getZ());
+    // Hardware.telemetry.printToConsole("Left Driver X: " + Hardware.leftDriver.getX());
+    // Hardware.telemetry.printToConsole("Left Driver Y: " + Hardware.leftDriver.getY());
+    // Hardware.telemetry.printToConsole("Left Driver Z: " + Hardware.leftDriver.getZ());
 
     // Right Driver
-    Hardware.telemetry.printToConsole("Right Driver X: " + Hardware.rightDriver.getX());
-    Hardware.telemetry.printToConsole("Right Driver Y: " + Hardware.rightDriver.getY());
-    Hardware.telemetry.printToConsole("Right Driver Z: " + Hardware.rightDriver.getZ());
+    // Hardware.telemetry.printToConsole("Right Driver X: " + Hardware.rightDriver.getX());
+    // Hardware.telemetry.printToConsole("Right Driver Y: " + Hardware.rightDriver.getY());
+    // Hardware.telemetry.printToConsole("Right Driver Z: " + Hardware.rightDriver.getZ());
 
     // Left Operator
-    Hardware.telemetry.printToConsole("Left Op X: " + Hardware.leftOperator.getX());
-    Hardware.telemetry.printToConsole("Left Op Y: " + Hardware.leftOperator.getY());
-    Hardware.telemetry.printToConsole("Left Op Z: " + Hardware.leftOperator.getZ());
+    // Hardware.telemetry.printToConsole("Left Op X: " + Hardware.leftOperator.getX());
+    // Hardware.telemetry.printToConsole("Left Op Y: " + Hardware.leftOperator.getY());
+    // Hardware.telemetry.printToConsole("Left Op Z: " + Hardware.leftOperator.getZ());
 
     // Right Operator
-    Hardware.telemetry.printToConsole("Right Op X: " + Hardware.rightOperator.getX());
-    Hardware.telemetry.printToConsole("Right Op Y: " + Hardware.rightOperator.getY());
-    Hardware.telemetry.printToConsole("Right Op Z: " + Hardware.rightOperator.getZ());
+    // Hardware.telemetry.printToConsole("Right Op X: " + Hardware.rightOperator.getX());
+    // Hardware.telemetry.printToConsole("Right Op Y: " + Hardware.rightOperator.getY());
+    // Hardware.telemetry.printToConsole("Right Op Z: " + Hardware.rightOperator.getZ());
 
     
     // ========== OUTPUTS ==========
@@ -134,10 +135,10 @@ public static void printStatements()
     // ----------- CAN -------------
 
     // Motor Percentages
-    Hardware.telemetry.printToConsole("L.R. Motor: " + Hardware.leftRearMotor.get());
-    Hardware.telemetry.printToConsole("R.R. Motor: " + Hardware.rightRearMotor.get());
-    Hardware.telemetry.printToConsole("L.F. Motor: " + Hardware.leftFrontMotor.get());
-    Hardware.telemetry.printToConsole("R.F. Motor: " + Hardware.rightFrontMotor.get());
+    // Hardware.telemetry.printToConsole("L.R. Motor: " + Hardware.leftRearMotor.get());
+    // Hardware.telemetry.printToConsole("R.R. Motor: " + Hardware.rightRearMotor.get());
+    // Hardware.telemetry.printToConsole("L.F. Motor: " + Hardware.leftFrontMotor.get());
+    // Hardware.telemetry.printToConsole("R.F. Motor: " + Hardware.rightFrontMotor.get());
 
 
     // -------- SUBSYSTEMS ---------

@@ -68,12 +68,12 @@ public class DrivePID extends Drive {
      * separately from the widget)
      */
     private void initPIDControllers() {
-        LiveWindow.remove(driveStraightInchesPID);
-        LiveWindow.remove(driveStraightPID_enc);
-        LiveWindow.remove(driveStraightPID_gyro);
-        LiveWindow.remove(turnDegreesPID_enc);
-        LiveWindow.remove(turnDegreesPID_gyro);
-        LiveWindow.remove(brakePID);
+        LiveWindow.disableTelemetry(driveStraightInchesPID);
+        LiveWindow.disableTelemetry(driveStraightPID_enc);
+        LiveWindow.disableTelemetry(driveStraightPID_gyro);
+        LiveWindow.disableTelemetry(turnDegreesPID_enc);
+        LiveWindow.disableTelemetry(turnDegreesPID_gyro);
+        LiveWindow.disableTelemetry(brakePID);
     }
 
     /**

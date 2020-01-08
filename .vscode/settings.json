@@ -7,8 +7,10 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "bin/": true,
-    ".classpath": true,
-    ".project": true
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
   },
-  "wpilib.online": true
+  "java.format.settings.url": "eclipse-formatter.xml"
 }
