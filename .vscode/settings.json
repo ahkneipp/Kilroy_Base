@@ -12,5 +12,6 @@
     "**/.settings": true,
     "**/.factorypath": true
   },
-  "java.format.settings.url": "eclipse-formatter.xml"
+  "java.format.settings.url": "/home/ryan/workspaces/java_format_prefs.xml",
+  "java.dependency.packagePresentation": "flat"
 }
